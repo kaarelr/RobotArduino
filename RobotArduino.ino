@@ -1,12 +1,26 @@
-float minFactor, midFactor, maxFactor;
-float minDistance, midDistance, maxDistance;
-float int motorPinRight, motorPinCentre, motorPinLeft;
+//Factor variables
+const float minFactor, midFactor, maxFactor;
+//Distance variables
+const float minDistance, midDistance, maxDistance;
+//IR pin variables
+//TODO: IR PIN VARIABLES
+
 
 void setup() {
   // put your setup code here, to run once:
 pinMode             //Määrame, kas see on input või output
 pinMode
 pinMode
+  
+  //Määrame kiiruse faktorid
+  minFactor = 0.4f;
+  midFactor = 0.7f;
+  maxFactor = 1.0f;
+  
+  //Määrame kaugused
+  minDistance = 4.0f;
+  midDistance = 10.0f;
+  maxDistance = 20.0f;
   
 delay (5000);       //5s viivitust enne mootorite tööle minekut
 motors_forward(maxFactor);
