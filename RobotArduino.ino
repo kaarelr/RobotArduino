@@ -64,36 +64,41 @@ void sensorLogics(){
     motors_left(maxFactor);
   }
 }
-// motor factors//
+// motor factors
 void motors_rightf(float factor){
-  analogWrite(mot_rightf, 255*factor);
+  analogWrite(mot_rightf, 255*factor);//mootorid edasi paremale
   analogWrite (mot_leftf, 255);
   digitalWrite(mot_leftb,0);
   digitalWrite(mot_rightb,0);
 }
-void motors_leftf(float factor){
+void motors_leftf(float factor){// mootorid edasi vasakule
   analogWrite(mot_leftf, 255*factor);
   analogWrite(mot_rightf, 255);
   digitalWrite(mot_leftb, 0);
   digitalWrite(mot_rightb,0);
 }
-void motors_leftb (float factor){
+void motors_leftb (float factor){//mootorid tagasi vasakule
   analogWrite(mot_leftb, 255*factor);
   analogWrite(mot_rightb, 255);
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
-void motors_rightb ( float factor){
+void motors_rightb ( float factor){//mootorid tagasi paremale
   analogWrite(mot_leftb, 255);
   analogWrite(mot_rightb, 255*factor);
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
-  void motors_f(  float factor){
+void motors_f(  float factor){//mootorid edasi
     analogWrite(mot_rightf, 255*factor);
     analogWrite(mot_leftf, 255*factor);
     digitalWrite(mot_leftb,0);
     digitalWrite(mot_rightb,0);
 }
-  
+void motors_b(  float factor){ //mootorid tagasi
+    analogWrite(mot_rightb, 255*factor);
+    analogWrite(mot_leftb, 255*factor); 
+    digitalWrite(mot_leftf,0);
+    digitalWrite(mot_rightf,0);
+}
   
