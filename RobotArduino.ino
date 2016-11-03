@@ -1,26 +1,17 @@
-//Factor variables
-const float minFactor, midFactor, maxFactor;
-//Distance variables
-const float minDistance, midDistance, maxDistance;
-//IR pin variables
-//TODO: IR PIN VARIABLES
+float minFactor, midFactor, maxFactor;
+float minDistance, midDistance, maxDistance;
+float int motorPinRight, motorPinCentre, motorPinLeft;
 
+const int mot_rightf = 5; // mootorite def
+const int mot_leftf = 10;
+const int mot_rightb = 6;
+const int mot_leftb = 11;
 
 void setup() {
   // put your setup code here, to run once:
 pinMode             //Määrame, kas see on input või output
 pinMode
 pinMode
-  
-  //Määrame kiiruse faktorid
-  minFactor = 0.4f;
-  midFactor = 0.7f;
-  maxFactor = 1.0f;
-  
-  //Määrame kaugused
-  minDistance = 4.0f;
-  midDistance = 10.0f;
-  maxDistance = 20.0f;
   
 delay (5000);       //5s viivitust enne mootorite tööle minekut
 motors_forward(maxFactor);
@@ -73,4 +64,36 @@ void sensorLogics(){
     motors_left(maxFactor);
   }
 }
-
+// motor factors//
+void motors_rightf(float factor){
+  analogWrite(mot_rightf, 255*factor);
+  analogWrite (mot_leftf, 255);
+  digitalWrite(mot_leftb,0);
+  digitalWrite(mot_rightb,0);
+}
+void motors_leftf(float factor){
+  analogWrite(mot_leftf, 255*factor);
+  analogWrite(mot_rightf, 255);
+  digitalWrite(mot_leftb, 0);
+  digitalWrite(mot_rightb,0);
+}
+void motors_leftb (float factor){
+  analogWrite(mot_leftb, 255*factor);
+  analogWrite(mot_rightb, 255);
+  digitalWrite(mot_leftf, 0);
+  digitalWrite(mot_rightf,0);
+}
+void motors_rightb ( float factor){
+  analogWrite(mot_leftb, 255);
+  analogWrite(mot_rightb, 255*factor);
+  digitalWrite(mot_leftf, 0);
+  digitalWrite(mot_rightf,0);
+}
+  void motors_f(  float factor){
+    analogWrite(mot_rightf, 255*factor);
+    analogWrite(mot_leftf, 255*factor);
+    digitalWrite(mot_leftb,0);
+    digitalWrite(mot_rightb,0);
+}
+  
+  
