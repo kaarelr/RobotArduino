@@ -7,11 +7,17 @@ const int mot_leftf = 10;
 const int mot_rightb = 6;
 const int mot_leftb = 11;
 
+int mot_speed = 255 // mootorite kiirus
+
+int irSensorVasak = A0;
+int irSensorParem = A2;
+int irSensorKeskmine = A1;
+  
 void setup() {
   // put your setup code here, to run once:
-pinMode             //Määrame, kas see on input või output
-pinMode
-pinMode
+pinMode (irSensorVasak, INPUT); //Määrame, kas see on input või output
+pinMode (irSensorKeskmine, INPUT);
+pinMode (irSensorParem, INPUT);
   
 delay (5000);       //5s viivitust enne mootorite tööle minekut
 motors_forward(maxFactor);
