@@ -1,26 +1,26 @@
 float minFactor, midFactor, maxFactor;
 float minDistance, midDistance, maxDistance;
-float int motorPinRight, motorPinCentre, motorPinLeft;
+float motorPinRight, motorPinCentre, motorPinLeft;
 
 const int mot_rightf = 5; // mootorite def
 const int mot_leftf = 10;
 const int mot_rightb = 6;
 const int mot_leftb = 11;
 
-int mot_speed = 255 // mootorite kiirus
+int mot_speed = 255; // mootorite kiirus
 
-int irSensorVasak = A0;
-int irSensorParem = A2;
-int irSensorKeskmine = A1;
+int IRVasak = A0;
+int IRParem = A2;
+int IRKeskmine = A1;
   
 void setup() {
   // put your setup code here, to run once:
-pinMode (irSensorVasak, INPUT); //Määrame, kas see on input või output
-pinMode (irSensorKeskmine, INPUT);
-pinMode (irSensorParem, INPUT);
+pinMode (IRVasak, INPUT); //Määrame, kas see on input või output
+pinMode (IRKeskmine, INPUT);
+pinMode (IRParem, INPUT);
   
 delay (5000);       //5s viivitust enne mootorite tööle minekut
-motors_forward(maxFactor);
+motors_f(maxFactor);
 }
 
 void loop() {
@@ -38,36 +38,36 @@ int calculateDistance(int sensorPin){
 
 void sensorLogics(){
   //DISTANCE RIGHT
-  if(calculateDistance(right) > minDistance && calculateDistance(right) < midDistance){
-    motors_right(minFactor);
+  if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance){
+    motors_rightf(minFactor);
   }
-  else if(calculateDistance(right) > midDistance && calculateDistance(right) <maxDistance) {
-    motors_right(midFactor);
+  else if(calculateDistance(IRParem) > midDistance && calculateDistance(IRParem) <maxDistance) {
+    motors_rightf(midFactor);
   }
-  else if(calculateDistance(right) > maxDistance){
-    motors_right(maxFactor);
+  else if(calculateDistance(IRParem) > maxDistance){
+    motors_rightf(maxFactor);
   }
 
 //DISTANCE MID
-   if(calculateDistance(centre) > minDistance && calculateDistance(right) < midDistance){
-    motors_forward(minFactor);
+   if(calculateDistance(IRKeskmine) > minDistance && calculateDistance(IRKeskmine) < midDistance){
+    motors_f(minFactor);
   }
-  else if(calculateDistance(centre) > midDistance && calculateDistance(right) <maxDistance) {
-    motors_forward(midFactor);
+  else if(calculateDistance(IRKeskmine) > midDistance && calculateDistance(IRKeskmine) <maxDistance) {
+    motors_f(midFactor);
   }
-  else if(calculateDistance(centre) > maxDistance){
-    motors_forward(maxFactor);
+  else if(calculateDistance(IRKeskmine) > maxDistance){
+    motors_f(maxFactor);
   }
 
 //DISTANCE LEFT
-    if(calculateDistance(left) > minDistance && calculateDistance(right) < midDistance){
-    motors_left(minFactor);
+    if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance){
+    motors_leftf(minFactor);
   }
-  else if(calculateDistance(left) > midDistance && calculateDistance(right) <maxDistance) {
-    motors_left(midFactor);
+  else if(calculateDistance(IRVasak) > midDistance && calculateDistance(IRVasak) <maxDistance) {
+    motors_leftf(midFactor);
   }
-  else if(calculateDistance(left) > maxDistance){
-    motors_left(maxFactor);
+  else if(calculateDistance(IRVasak) > maxDistance){
+    motors_leftf(maxFactor);
   }
 }
 // motor factors
@@ -107,4 +107,3 @@ void motors_b(  float factor){ //mootorid tagasi
     digitalWrite(mot_leftf,0);
     digitalWrite(mot_rightf,0);
 }
-  
