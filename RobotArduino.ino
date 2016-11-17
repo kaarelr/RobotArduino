@@ -39,7 +39,7 @@ int calculateDistance(int sensorPin){
 
 void sensorLogics(){
   //DISTANCE RIGHT
-  if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance){
+  if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance && calculateDistance(IRVasak) > midDistance {
     motors_rightf(minFactor);
   }
   else if(calculateDistance(IRParem) > midDistance && calculateDistance(IRParem) <maxDistance) {
