@@ -103,8 +103,8 @@ void motors_f(  float factor){//mootorid edasi
     digitalWrite(mot_rightb,0);
 }
 void motors_b(  float factor){ //mootorid tagasi
-    analogWrite(mot_rightb, 255*factor);
-    analogWrite(mot_leftb, 255*factor); 
+    analogWrite(mot_rightb, 255);
+    analogWrite(mot_leftb, 255); 
     digitalWrite(mot_leftf,0);
     digitalWrite(mot_rightf,0);
 }
