@@ -1,6 +1,5 @@
 float minFactor, midFactor, maxFactor;
 float minDistance, midDistance, maxDistance;
-float motorPinRight, motorPinCentre, motorPinLeft;
 
 const int mot_rightf = 5; // mootorite def
 const int mot_leftf = 10;
@@ -18,7 +17,9 @@ void setup() {
 pinMode (IRVasak, INPUT); //Määrame, kas see on input või output
 pinMode (IRKeskmine, INPUT);
 pinMode (IRParem, INPUT);
-  
+midDistance = 4;
+midDistance = 10;
+maxDistance = 20;
 delay (5000);       //5s viivitust enne mootorite tööle minekut
 motors_f(maxFactor);
 }
