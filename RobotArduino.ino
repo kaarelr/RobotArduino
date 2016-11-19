@@ -38,6 +38,10 @@ int calculateDistance(int sensorPin){
   }
 
 void sensorLogics(){
+  int distParem = calculateDistance(IRParem);
+  int distKeskmine = calculateDistance(IRKeskmine);
+  int distVasak = calculateDistance(IRVasak);
+    
   //DISTANCE RIGHT
   if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance && calculateDistance(IRVasak) > midDistance {
     motors_rightf(minFactor);
