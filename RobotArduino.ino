@@ -26,7 +26,7 @@ motors_f(maxFactor);
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  sensorLogics();
 }
 
 int calculateDistance(int sensorPin){
@@ -43,35 +43,37 @@ void sensorLogics(){
   int distVasak = calculateDistance(IRVasak);
     
   //DISTANCE RIGHT
-  if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance && calculateDistance(IRVasak) > midDistance {
+  if(distParem > minDistance && distParem < midDistance && distVasak > midDistance {
     motors_rightf(minFactor);
   }
-  else if(calculateDistance(IRParem) > midDistance && calculateDistance(IRParem) <maxDistance) {
+  else if(distParem > midDistance && distParem < maxDistance) {
     motors_rightf(midFactor);
   }
-  else if(calculateDistance(IRParem) > maxDistance){
+  else if(distParem > maxDistance){
     motors_rightf(maxFactor);
   }
+     
+  
 
 //DISTANCE MID
-   if(calculateDistance(IRKeskmine) > minDistance && calculateDistance(IRKeskmine) < midDistance){
+   if(distKeskmine > minDistance && distKeskmine < midDistance){
     motors_f(minFactor);
   }
-  else if(calculateDistance(IRKeskmine) > midDistance && calculateDistance(IRKeskmine) <maxDistance) {
+  else if(distKeskmine > midDistance && distKeskmine < maxDistance) {
     motors_f(midFactor);
   }
-  else if(calculateDistance(IRKeskmine) > maxDistance){
+  else if(distKeskmine > maxDistance){
     motors_f(maxFactor);
   }
 
 //DISTANCE LEFT
-    if(calculateDistance(IRParem) > minDistance && calculateDistance(IRParem) < midDistance){
+    if(distParem > minDistance && distParem < midDistance){
     motors_leftf(minFactor);
   }
-  else if(calculateDistance(IRVasak) > midDistance && calculateDistance(IRVasak) <maxDistance) {
+  else if(distVasak > midDistance && distVasak <maxDistance) {
     motors_leftf(midFactor);
   }
-  else if(calculateDistance(IRVasak) > maxDistance){
+  else if(distVasak > maxDistance){
     motors_leftf(maxFactor);
   }
 }
