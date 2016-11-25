@@ -17,7 +17,7 @@ void setup() {
 pinMode (IRVasak, INPUT); //Määrame, kas see on input või output
 pinMode (IRKeskmine, INPUT);
 pinMode (IRParem, INPUT);
-midDistance = 4;
+minDistance = 4;
 midDistance = 10;  
 maxDistance = 20;
 delay (5000);       //5s viivitust enne mootorite tööle minekut
@@ -37,47 +37,7 @@ int calculateDistance(int sensorPin){
   return distance;
   }
 
-void sensorLogics(){
-  int distParem = calculateDistance(IRParem);
-  int distKeskmine = calculateDistance(IRKeskmine);
-  int distVasak = calculateDistance(IRVasak);
-    
-  //DISTANCE RIGHT
-  if(distParem > minDistance && distParem < midDistance && distVasak > midDistance {
-    motors_rightf(minFactor);
-  }
-  else if(distParem > midDistance && distParem < maxDistance) {
-    motors_rightf(midFactor);
-  }
-  else if(distParem > maxDistance){
-    motors_rightf(maxFactor);
-  }
-     
-  
-
-//DISTANCE MID
-   if(distKeskmine > minDistance && distKeskmine < midDistance){
-    motors_f(minFactor);
-  }
-  else if(distKeskmine > midDistance && distKeskmine < maxDistance) {
-    motors_f(midFactor);
-  }
-  else if(distKeskmine > maxDistance){
-    motors_f(maxFactor);
-  }
-
-//DISTANCE LEFT
-    if(distParem > minDistance && distParem < midDistance){
-    motors_leftf(minFactor);
-  }
-  else if(distVasak > midDistance && distVasak <maxDistance) {
-    motors_leftf(midFactor);
-  }
-  else if(distVasak > maxDistance){
-    motors_leftf(maxFactor);
-  }
-}
-// motor factors
+  // motor factors
 void motors_rightf(float factor){
   analogWrite(mot_rightf, 255*factor);//mootorid edasi paremale
   analogWrite (mot_leftf, 255);
@@ -102,7 +62,7 @@ void motors_rightb ( float factor){//mootorid tagasi paremale
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
-void motors_f(  float factor){//mootorid edasi
+void motors_f(float factor){//mootorid edasi
     analogWrite(mot_rightf, 255*factor);
     analogWrite(mot_leftf, 255*factor);
     digitalWrite(mot_leftb,0);
@@ -114,3 +74,84 @@ void motors_b(  float factor){ //mootorid tagasi
     digitalWrite(mot_leftf,0);
     digitalWrite(mot_rightf,0);
 }
+
+void sensorLogics(){
+  int distParem = calculateDistance(IRParem);
+  int distKeskmine = calculateDistance(IRKeskmine);
+  int distVasak = calculateDistance(IRVasak);
+    
+  //DISTANCE RIGHT
+  if(distParem < midDistance){
+    if(distVasak > maxDistance){
+    motors_leftf(maxFactor);
+    } else if(distVasak < maxDistance && distVasak > midDistance){
+      motors_leftf(midFactor);
+    } else if(distVasak < midDistance){
+      if(distKeskmine > maxDistance){
+       motors_f(maxFactor);
+      } else if(distKeskmine < maxDistance && distKeskmine > midDistance){
+       motors_f(midFactor);
+      } else if(distKeskmine < midDistance){
+        //TODO: Reverse + recalculate
+       //motors_f(maxFactor);
+      }
+    }
+  }
+  else if(distParem > midDistance && distParem < maxDistance) {
+        if(distVasak > maxDistance){
+        motors_leftf(midFactor);
+    } else if(distVasak < maxDistance && distVasak > midDistance){
+      if(distKeskmine > maxDistance){
+      motors_f(maxFactor);
+      } else if(distKeskmine < maxDistance && distKeskmine > midDistance){
+        motors_f(midFactor); 
+      } else if(distKeskmine < midDistance){
+        //Paremale v vasakule
+        motors_rightf(minFactor);
+    } else if(distVasak < midDistance){
+      motors_rightf(midFactor);
+    }
+  }
+  else if(distParem > maxDistance){
+    if(distVasak > maxDistance) {
+      if(distKeskmine > maxDistance){
+        motors_f(maxFactor);
+      } else if(distKeskmine > midFactor && distKeskmine < maxFactor){
+        motors_f(midFactor);
+      } else if(distKeskmine < midDistance){
+        motors_rightf(minFactor);
+      }
+    } else if(distVasak > midDistance && distVasak < maxDistance){
+      motors_rightf(midFactor);
+    } else if(distVasak < midDistance){
+      motors_rightf(minFactor);
+    }
+  }
+     
+  
+
+//DISTANCE MID
+   if(distKeskmine > minDistance && distKeskmine < midDistance){
+  motors_f(minFactor);
+  }
+  else if(distKeskmine > midDistance && distKeskmine < maxDistance) {
+    motors_f(midFactor);
+  }
+  else if(distKeskmine > maxDistance){
+    //motors_f(maxFactor);
+  }
+
+//DISTANCE LEFT
+    if(distParem > minDistance && distParem < midDistance){
+    motors_leftf(minFactor);
+  }
+  else if(distVasak > midDistance && distVasak <maxDistance) {
+    motors_leftf(midFactor);
+  }
+  else if(distVasak > maxDistance){
+    motors_leftf(maxFactor);
+  }
+}
+}
+
+
