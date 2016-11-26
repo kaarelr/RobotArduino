@@ -56,7 +56,7 @@ void motors_leftb (float factor){//mootorid tagasi vasakule
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
-void motors_rightb ( float factor){//mootorid tagasi paremale
+void motors_rightb (float factor){//mootorid tagasi paremale
   analogWrite(mot_leftb, 255);
   analogWrite(mot_rightb, 255*factor);
   digitalWrite(mot_leftf, 0);
@@ -68,7 +68,7 @@ void motors_f(float factor){//mootorid edasi
     digitalWrite(mot_leftb,0);
     digitalWrite(mot_rightb,0);
 }
-void motors_b(  float factor){ //mootorid tagasi
+void motors_b(float factor){ //mootorid tagasi
     analogWrite(mot_rightb, 255);
     analogWrite(mot_leftb, 255); 
     digitalWrite(mot_leftf,0);
@@ -92,8 +92,7 @@ void sensorLogics(){
       } else if(distKeskmine < maxDistance && distKeskmine > midDistance){
        motors_f(midFactor);
       } else if(distKeskmine < midDistance){
-        //TODO: Reverse + recalculate
-       //motors_f(maxFactor);
+        motors_b(maxFactor);
       }
     }
   }
@@ -129,7 +128,7 @@ void sensorLogics(){
   }
      
   
-
+/*
 //DISTANCE MID
    if(distKeskmine > minDistance && distKeskmine < midDistance){
   motors_f(minFactor);
@@ -151,7 +150,7 @@ void sensorLogics(){
   else if(distVasak > maxDistance){
     motors_leftf(maxFactor);
   }
-}
+} */ 
 }
 
 
