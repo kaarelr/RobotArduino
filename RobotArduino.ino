@@ -2,26 +2,27 @@ float minFactor, midFactor, maxFactor;  //mootori kiiruse faktorid
 float minDistance, midDistance, maxDistance;  // erinevad kaugused et panna mootird erineval kiirusel liikuma
 
 const int mot_rightf = 5; // mootorite def
-const int mot_leftf = 10;
+const int mot_leftf = 9;
 const int mot_rightb = 6;
-const int mot_leftb = 11;
+const int mot_leftb = 10;
 
-int mot_speed = 255; // mootorite kiirus
+int mot_speed = 100; // mootorite kiirus
 
 int IRVasak = A0;  // sensorite def
 int IRParem = A2;
 int IRKeskmine = A1;
   
 void setup() {
+  Serial.begin(9600);
   // put your setup code here, to run once:
 pinMode (IRVasak, INPUT); //Määrame, kas see on input või output
 pinMode (IRKeskmine, INPUT);
 pinMode (IRParem, INPUT);
 minDistance = 4;
-midDistance = 10;  
-maxDistance = 20;
+midDistance = 90;  
+maxDistance = 200;
 minFactor = 0.3f;
-midFactor = 0.65f;
+midFactor = 0.45f;
 maxFactor = 1.0f;
 delay (5000);       //5s viivitust enne mootorite tööle minekut
 motors_f(maxFactor);
@@ -42,38 +43,38 @@ int calculateDistance(int sensorPin){
 
   // motor factors
 void motors_rightf(float factor){
-  analogWrite(mot_rightf, 255*factor);//mootorid edasi paremale
-  analogWrite (mot_leftf, 255);
+  analogWrite(mot_rightf, 100*factor);//mootorid edasi paremale
+  analogWrite (mot_leftf, 100);
   digitalWrite(mot_leftb,0);
   digitalWrite(mot_rightb,0);
 }
 void motors_leftf(float factor){// mootorid edasi vasakule
-  analogWrite(mot_leftf, 255*factor);
-  analogWrite(mot_rightf, 255);
+  analogWrite(mot_leftf, 100*factor);
+  analogWrite(mot_rightf, 100);
   digitalWrite(mot_leftb, 0);
   digitalWrite(mot_rightb,0);
 }
 void motors_leftb (float factor){//mootorid tagasi vasakule
-  analogWrite(mot_leftb, 255*factor);
-  analogWrite(mot_rightb, 255);
+  analogWrite(mot_leftb, 100*factor);
+  analogWrite(mot_rightb, 100);
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
 void motors_rightb (float factor){//mootorid tagasi paremale
-  analogWrite(mot_leftb, 255);
-  analogWrite(mot_rightb, 255*factor);
+  analogWrite(mot_leftb, 100);
+  analogWrite(mot_rightb, 100*factor);
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
 void motors_f(float factor){//mootorid edasi
-    analogWrite(mot_rightf, 255*factor);
-    analogWrite(mot_leftf, 255*factor);
+    analogWrite(mot_rightf, 100*factor);
+    analogWrite(mot_leftf, 100*factor);
     digitalWrite(mot_leftb,0);
     digitalWrite(mot_rightb,0);
 }
 void motors_b(float factor){ //mootorid tagasi
-    analogWrite(mot_rightb, 255);
-    analogWrite(mot_leftb, 255); 
+    analogWrite(mot_rightb, 100);
+    analogWrite(mot_leftb, 100); 
     digitalWrite(mot_leftf,0);
     digitalWrite(mot_rightf,0);
 }
