@@ -20,6 +20,9 @@ pinMode (IRParem, INPUT);
 minDistance = 4;
 midDistance = 10;  
 maxDistance = 20;
+minFactor = 0.3f;
+midFactor = 0.65f;
+maxFactor = 1.0f;
 delay (5000);       //5s viivitust enne mootorite tööle minekut
 motors_f(maxFactor);
 }
@@ -151,6 +154,7 @@ void sensorLogics(){
     motors_leftf(maxFactor);
   }
 } */ 
+}
 }
 
 
