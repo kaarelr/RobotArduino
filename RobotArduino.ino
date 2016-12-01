@@ -1,5 +1,5 @@
 float minFactor, midFactor, maxFactor;  //mootori kiiruse faktorid
-float minDistance, midDistance, maxDistance;  // erinevad kaugused et panna mootird erineval kiirusel liikuma
+float midDistance, maxDistance;  // erinevad kaugused et panna mootird erineval kiirusel liikuma
 
 const int mot_rightf = 5; // mootorite def
 const int mot_leftf = 9;
@@ -18,7 +18,6 @@ void setup() {
 pinMode (IRVasak, INPUT); //Määrame, kas see on input või output
 pinMode (IRKeskmine, INPUT);
 pinMode (IRParem, INPUT);
-minDistance = 4;
 midDistance = 90;  
 maxDistance = 200;
 minFactor = 0.3f;
