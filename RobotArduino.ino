@@ -87,7 +87,7 @@ void sensorLogics(){
   //DISTANCE RIGHT
   if(distParem < midDistance){
     if(distVasak > maxDistance){
-    motors_leftf(maxFactor);
+    motors_leftf(minFactor);
     Serial.println("vasakule max - vähe");
     } else if(distVasak < maxDistance && distVasak > midDistance){
       motors_leftf(midFactor);
