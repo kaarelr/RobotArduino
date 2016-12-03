@@ -44,38 +44,38 @@ int calculateDistance(int sensorPin){
 
   // motor factors
 void motors_rightf(float factor){
-  analogWrite(mot_rightf, 100*factor);//mootorid edasi paremale
-  analogWrite (mot_leftf, 100);
+  analogWrite(mot_rightf, 255*factor);//mootorid edasi paremale
+  analogWrite (mot_leftf, 255);
   digitalWrite(mot_leftb,0);
   digitalWrite(mot_rightb,0);
 }
 void motors_leftf(float factor){// mootorid edasi vasakule
-  analogWrite(mot_leftf, 100*factor);
-  analogWrite(mot_rightf, 100);
+  analogWrite(mot_leftf, 255*factor);
+  analogWrite(mot_rightf, 255);
   digitalWrite(mot_leftb, 0);
   digitalWrite(mot_rightb,0);
 }
 void motors_leftb (float factor){//mootorid tagasi vasakule
-  analogWrite(mot_leftb, 100*factor);
-  analogWrite(mot_rightb, 100);
+  analogWrite(mot_leftb, 255*factor);
+  analogWrite(mot_rightb, 255);
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
 void motors_rightb (float factor){//mootorid tagasi paremale
-  analogWrite(mot_leftb, 100);
-  analogWrite(mot_rightb, 100*factor);
+  analogWrite(mot_leftb, 255);
+  analogWrite(mot_rightb, 255*factor);
   digitalWrite(mot_leftf, 0);
   digitalWrite(mot_rightf,0);
 }
 void motors_f(float factor){//mootorid edasi
-    analogWrite(mot_rightf, 100*factor);
-    analogWrite(mot_leftf, 100*factor);
+    analogWrite(mot_rightf, 255*factor);
+    analogWrite(mot_leftf, 255*factor);
     digitalWrite(mot_leftb,0);
     digitalWrite(mot_rightb,0);
 }
 void motors_b(float factor){ //mootorid tagasi
-    analogWrite(mot_rightb, 100);
-    analogWrite(mot_leftb, 100); 
+    analogWrite(mot_rightb, 255);
+    analogWrite(mot_leftb, 255); 
     digitalWrite(mot_leftf,0);
     digitalWrite(mot_rightf,0);
 }
@@ -89,47 +89,56 @@ void sensorLogics(){
   //delay (500);
     
   //DISTANCE RIGHT
+  //parem lähedal
   if(distParem < midDistance){
+    //vasak kaugel
     if(distVasak > maxDistance){
+      //keskel lähedal
       if(distKeskmine < midDistance){
-    motors_leftf(minFactor);
+    motors_rightb(maxFactor);
     Serial.println("vasakule min - palju");
     Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskel mid
       } else if (distKeskmine < maxDistance && distKeskmine > midDistance){
-          motors_leftf(midFactor)
-        } else if (distKeskmine > maxDistance){
+          motors_leftf(midFactor);
+      //keskel kaugel
+      } else if (distKeskmine > maxDistance){
           motors_leftf(maxFactor);
         }
       }
+     //vasak mid
      else if(distVasak < maxDistance && distVasak > midDistance){
+      //keskel lähedal
       if(distKeskmine < midDistance){
-              motors_leftf(minFactor);
-              Serial.println("vasakule min");
-              Serial.println(distVasak);
-              Serial.println(distKeskmine);
-              Serial.println(distParem);
+              motors_leftf(midFactor);
+      //keskel mid
       } else if (distKeskmine < maxDistance && distKeskmine > midDistance){
-          motors_leftf(midFactor)
+          motors_leftf(midFactor);
+        //keskel kaugel
         } else if (distKeskmine > maxDistance){
           motors_leftf(maxFactor);
         }
+    //vasakul lähedal
     } else if(distVasak < midDistance){
+      //keskel kaugel
       if(distKeskmine > maxDistance){
        motors_f(maxFactor);
        Serial.println("edasi max");
            Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskel mid
       } else if(distKeskmine < maxDistance && distKeskmine > midDistance){
        motors_f(midFactor);
         Serial.println("edasi mid");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskel lähedal
       } else if(distKeskmine < midDistance){
-        motors_b(maxFactor);
+        motors_b(minFactor);
         Serial.println("tagasi max");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
@@ -137,78 +146,113 @@ void sensorLogics(){
       }
     }
   }
+  //parem mid
   else if(distParem > midDistance && distParem < maxDistance) {
+    //vasak kaugel
         if(distVasak > maxDistance){
-        motors_leftf(midFactor);
-          Serial.println("vasakule mid");
-              Serial.println(distVasak);
-    Serial.println(distKeskmine);
-    Serial.println(distParem);
+         //keskel lähedal
+      if(distKeskmine < midDistance){
+      motors_rightb(maxFactor);
+      //keskel mid
+      } else if (distKeskmine < maxDistance && distKeskmine > midDistance){
+          motors_leftf(midFactor);
+      //keskel kaugel
+      } else if (distKeskmine > maxDistance){
+          motors_leftf(maxFactor);
+        }
+    //vasak mid
     } else if(distVasak < maxDistance && distVasak > midDistance){
+      //keskmine kaugel
       if(distKeskmine > maxDistance){
       motors_f(maxFactor);
         Serial.println("edasi max");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskmine mid
       } else if(distKeskmine < maxDistance && distKeskmine > midDistance){
         motors_f(midFactor); 
         Serial.println("edasi mid");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskmine lähedal
       } else if(distKeskmine < midDistance){
         //Paremale v vasakule
-        motors_rightf(minFactor);
+        motors_rightf(maxFactor);
         Serial.println("paremale min - järsult");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+      }
+    //vasakul lähedal
     } else if(distVasak < midDistance){
-      motors_rightf(midFactor);
-        Serial.println("paremale mid");
-            Serial.println(distVasak);
-    Serial.println(distKeskmine);
-    Serial.println(distParem);
+         //keskel lähedal
+      if(distKeskmine < midDistance){
+      motors_leftb(maxFactor);
+      //keskel mid
+      } else if (distKeskmine < maxDistance && distKeskmine > midDistance){
+          motors_rightf(midFactor);
+      //keskel kaugel
+      } else if (distKeskmine > maxDistance){
+          motors_rightf(maxFactor);
+        }
     }
   }
-  }
+  
+  //parem kaugel
   else if(distParem > maxDistance){
+    //vasak kaugel
     if(distVasak > maxDistance) {
+      //keskmine kaugel
       if(distKeskmine > maxDistance){
         motors_f(maxFactor);
         Serial.println("edasi max");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskmine mid
       } else if(distKeskmine > midFactor && distKeskmine < maxFactor){
         motors_f(midFactor);
         Serial.println("edasi mid");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
+    //keskmine lähedal
       } else if(distKeskmine < midDistance){
-        motors_rightf(minFactor);
+        motors_b(minFactor);
         Serial.println("paremale min - järsult");
             Serial.println(distVasak);
     Serial.println(distKeskmine);
     Serial.println(distParem);
       }
+      //vasak mid
     } else if(distVasak > midDistance && distVasak < maxDistance){
-      motors_rightf(midFactor);
-      Serial.println("paremale mid");
-          Serial.println(distVasak);
-    Serial.println(distKeskmine);
-    Serial.println(distParem);
+         //keskel lähedal
+      if(distKeskmine < midDistance){
+      motors_leftb(maxFactor);
+      //keskel mid
+      } else if (distKeskmine < maxDistance && distKeskmine > midDistance){
+          motors_rightf(midFactor);
+      //keskel kaugel
+      } else if (distKeskmine > maxDistance){
+          motors_rightf(maxFactor);
+        }
+    //vasak lähedal
     } else if(distVasak < midDistance){
-      motors_rightf(minFactor);
-      Serial.println("paremale min - järsult");
-          Serial.println(distVasak);
-    Serial.println(distKeskmine);
-    Serial.println(distParem);
+         //keskel lähedal
+      if(distKeskmine < midDistance){
+      motors_rightb(minFactor);
+      //keskel mid
+      } else if (distKeskmine < maxDistance && distKeskmine > midDistance){
+          motors_rightf(minFactor);
+      //keskel kaugel
+      } else if (distKeskmine > maxDistance){
+          motors_rightf(midFactor);
+        }
     }
   }
-     
+}
   
 /*
 //DISTANCE MID
@@ -232,6 +276,6 @@ void sensorLogics(){
     motors_leftf(maxFactor);
   }
 } */ 
-}
+
 
 //hampster out
